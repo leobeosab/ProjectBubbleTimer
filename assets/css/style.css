@@ -6,14 +6,14 @@ body {
   .window-content form {
     margin-top: 25px;
     padding: 0 15px; }
-    .window-content form button {
-      padding: 10px;
-      color: #fff;
-      border-radius: 6px;
-      width: 100%;
-      margin-bottom: 10px;
-      background: #3072d4;
-      border: 1px solid #5a8fdd; }
+  .window-content button {
+    padding: 10px;
+    color: #fff;
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #3072d4;
+    border: 1px solid #5a8fdd; }
 
 .pane-group {
   padding: 10px; }
