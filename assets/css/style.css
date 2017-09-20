@@ -1,4 +1,22 @@
 body {
-  background: #fff; }
+  background: #fefefe; }
+
+.window-content {
+  flex-direction: column; }
+  .window-content form {
+    margin-top: 25px;
+    padding: 0 15px; }
+    .window-content form button {
+      padding: 10px;
+      color: #fff;
+      border-radius: 3px; }
+
+.pane-group {
+  padding: 10px; }
+  .pane-group .form-group label {
+    font-weight: 600;
+    color: #666; }
+  .pane-group select.form-control {
+    width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

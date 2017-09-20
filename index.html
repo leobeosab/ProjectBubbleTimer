@@ -4,15 +4,47 @@
     <title> Add Time </title>
     <link rel="stylesheet" href="./vendor/css/photon.min.css" media="screen"/>
     <link rel="stylesheet" href="./assets/css/style.css" media="screen"/>
+    <script src="./index.js"></script>
   </head>
   <body>
     <section class="window">
       <header class="toolbar toolbar-header">
-        <h1 class="title">Add Time</h1>
+        <h1 class="title">Add Time Entry</h1>
       </header>
       <div class="window-content">
-        Hello, world!
+        <form>
+          <div class="form-group">
+            <label> Project: </label>
+            <select id="project_select" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label> Task: </label>
+            <select id="task_select" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label> Sub-task: </label>
+            <select id="subtask_select" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label> Date: </label>
+            <input type="date" id="date_input" class="form-control"></input>
+          </div>
+          <div class="form-group">
+            <label> Hours: </label>
+            <input type="number" value="0.00" id="hours_input" class="form-control"></input>
+          </div>
+          <div class="form-group">
+            <label> Description: </label>
+            <textarea id="description" class="form-control"></textarea>
+          </div>
+          <div class="button-wrapper">
+            <button> Save </button>
+          </div>
+        </form>
       </div>
+      <footer class="toolbar toolbar-footer">
+        <h1 class="title"> Entering Time for ~ Ryan Wise </h1>
+      </footer>
     </section>
   </body>
 </html>
