@@ -15,7 +15,7 @@ app.on('ready', () => {
 });
 
 const createTray = () => {
-  tray = new Tray(path.join(assetsDirectory, 'img/tempicon.png'));
+  tray = new Tray(path.join(assetsDirectory, 'img/icon.png'));
   tray.on('right-click', toggleWindow);
   tray.on('double-click', toggleWindow);
   tray.on('click', function (event) {

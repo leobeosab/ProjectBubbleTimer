@@ -2,18 +2,26 @@
 const { ipcMain } = require('electron');
 const { apiKey, domain } = require("./constants");
 
-console.log(apiKey);
-
 const apiBase = "https://api.projectbubble.com/v2/";
 
 let projectSelect;
 let taskSelect;
 let subTaskSelect;
+let date;
+let hours;
+let description;
 
 function init() {
   projectSelect = document.getElementById("project_select");
   taskSelect = document.getElementById("task_select");
   subTaskSelect = document.getElementById("subtask_select");
+  
+  date = document.getElementById("date_input");
+  hours = document.getElementById("hours_input");
+  description = document.getElementById("description");
+
+  //Prevent number scrolling
+  hours.onscroll = (e) => e.preventDefault();
   
   //Populate projects
   updateProjects();
@@ -50,12 +58,37 @@ function updateSubTasks() {
   requestApi("subtasks", (response) => {
     console.log(response);
     if (response.data) {
-      addToSelect(subTaskSelect, "Select a task", "");
+      addToSelect(subTaskSelect, "Select a sub task", "");
       for (subtask of response.data) {
         addToSelect(taskSelect, subtask.subtask_name, subtask.subtask_id);
       }
     }
   }, [{ name: "task_id", value: taskSelect.value }]);
+}
+
+function submitToProjectBubble() {
+  let dateString = date.value.replace("-", "");
+  let seconds = parseFloat(hours.value) * 60 * 60;
+  let descriptionString = description.value;
+  
+  var headers = new Headers({
+    'key': apiKey,
+    'domain': domain,
+    'Content-Type': "application/json"
+  });
+  console.log(seconds);
+  fetch(apiBase + "time_entries/" + taskSelect.value + "?project_id=" + projectSelect.value, {
+    method: "POST",
+    body: JSON.stringify({
+      description: descriptionString,
+      seconds: seconds,
+      date: dateString,
+      subtask_id: subTaskSelect.value
+    }),
+    headers: headers
+  }).then((response) => response.json()).then( (response) => console.log(response));
+  
+  return false;
 }
 
 function requestApi(request, callback, getVars) {
@@ -76,7 +109,7 @@ function requestApi(request, callback, getVars) {
     }
     url = url.slice(0, -1);
   }
-  console.log(url);
+
   fetch(url, {
     headers: headers
   }).then((response) => response.json())
