@@ -8,17 +8,16 @@ body {
   form {
     margin-top: 25px;
     padding: 0 15px;
-  }
-  
-  button {
-    padding: 10px;
-    color: #fff;
-    border-radius: 6px;
-    width: 100%;
-    margin-bottom: 10px;
-    background: #3072d4;
-    border: 1px solid lighten(#3072d4, 10%)
-    margin: 0 15px;
+    
+    button {
+      padding: 10px;
+      color: #fff;
+      border-radius: 6px;
+      width: 100%;
+      margin-bottom: 10px;
+      background: #3072d4;
+      border: 1px solid lighten(#3072d4, 10%)
+    }
   }
 }
 

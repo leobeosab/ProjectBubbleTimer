@@ -32,6 +32,7 @@ function init() {
 }
 
 function updateProjects() {
+  projectSelect.innerHTML = "";
   taskSelect.innerHTML = "";
   requestApi("projects", (response) => {
     addToSelect(projectSelect, "Select a project", "");
@@ -67,7 +68,7 @@ function updateSubTasks() {
 }
 
 function submitToProjectBubble() {
-  let dateString = date.value.replace("-", "");
+  let dateString = date.value.replace(/\-/g, "");
   let seconds = parseFloat(hours.value) * 60 * 60;
   let descriptionString = description.value;
   
@@ -76,7 +77,7 @@ function submitToProjectBubble() {
     'domain': domain,
     'Content-Type': "application/json"
   });
-  console.log(seconds);
+  console.log(dateString);
   fetch(apiBase + "time_entries/" + taskSelect.value + "?project_id=" + projectSelect.value, {
     method: "POST",
     body: JSON.stringify({
@@ -86,7 +87,15 @@ function submitToProjectBubble() {
       subtask_id: subTaskSelect.value
     }),
     headers: headers
-  }).then((response) => response.json()).then( (response) => console.log(response));
+  }).then((response) => response.json()).then( (response) => {
+    console.log(response)
+    taskSelect.innerHTML = "";
+    subTaskSelect.innerHTML = "";
+    date.value = "";
+    hours.value = 0.00;
+    description.value = "";
+    updateProjects();
+  });
   
   return false;
 }
