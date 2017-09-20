@@ -16,23 +16,46 @@ function init() {
   subTaskSelect = document.getElementById("subtask_select");
   
   //Populate projects
+  updateProjects();
+  
+  //Populate Projects + Tasks
+  projectSelect.onchange = () => updateTasks();
+  taskSelect.onchange = () => updateSubTasks();
+}
+
+function updateProjects() {
+  taskSelect.innerHTML = "";
   requestApi("projects", (response) => {
+    addToSelect(projectSelect, "Select a project", "");
     for (project of response.data) {
       if (project.active == "1") {
           addToSelect(projectSelect, project.project_name, project.project_id);
       }
     }
   });
-  
-  //Populate Tasks
-  projectSelect.onchange = () => {
-    subTaskSelect.innerHTML = "";
-    requestApi("tasks", (response) => {
-      for (task of response.data) {
-        addToSelect(taskSelect, task.task_name, task.task_id);
+}
+
+function updateTasks() {
+  taskSelect.innerHTML = "";
+  subTaskSelect.innerHTML = "";
+  requestApi("tasks", (response) => {
+    addToSelect(taskSelect, "Select a task", "");
+    for (task of response.data) {
+      addToSelect(taskSelect, task.task_name, task.task_id);
+    }
+  }, [{ name: "project_id", value: projectSelect.value }]);
+}
+
+function updateSubTasks() {
+  requestApi("subtasks", (response) => {
+    console.log(response);
+    if (response.data) {
+      addToSelect(subTaskSelect, "Select a task", "");
+      for (subtask of response.data) {
+        addToSelect(taskSelect, subtask.subtask_name, subtask.subtask_id);
       }
-    }, [{ name: "project_id", value: projectSelect.value }]);
-  }
+    }
+  }, [{ name: "task_id", value: taskSelect.value }]);
 }
 
 function requestApi(request, callback, getVars) {
@@ -53,7 +76,7 @@ function requestApi(request, callback, getVars) {
     }
     url = url.slice(0, -1);
   }
-  
+  console.log(url);
   fetch(url, {
     headers: headers
   }).then((response) => response.json())
