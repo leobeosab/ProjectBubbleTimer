@@ -72,6 +72,21 @@ function submitToProjectBubble() {
   let seconds = parseFloat(hours.value) * 60 * 60;
   let descriptionString = description.value;
   
+  if (projectSelect.value == "" || taskSelect.value == "") {
+    alert("Project and task are required");
+    return false;
+  }
+  
+  if (dateString == "") {
+    alert("Error date is required");
+    return false;
+  }
+  
+  if (seconds <= 0) {
+    alert("Error valid time is required");
+    return false;
+  }
+  
   var headers = new Headers({
     'key': apiKey,
     'domain': domain,
