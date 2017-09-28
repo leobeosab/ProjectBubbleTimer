@@ -1,20 +1,23 @@
 {
-	"name": "ProjectBubbleTrapApp",
-	"productName": "PB Tray Application",
-	"version": "0.0.2",
-	"main": "main.js",
-	"author": "Ryan Wise",
-	"license": "MIT",
-	"scripts": {
-		"start": "electron .",
-		"package": "electron-packager ./ --platform=darwin --arch=x64 --out=out --icon=./icon.icns --overwrite"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/leobeosab/ProjectBubbleTrapApp"
-	},
-	"devDependencies": {
-		"electron-packager": "^7.3.0",
-		"electron-prebuilt": "^1.2.7"
-	}
+  "name": "ProjectBubbleTrapApp",
+  "productName": "PB Tray Application",
+  "version": "0.0.2",
+  "main": "main.js",
+  "author": "Ryan Wise",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager ./ --platform=darwin --arch=x64 --out=out --icon=./icon.icns --overwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leobeosab/ProjectBubbleTrapApp"
+  },
+  "devDependencies": {
+    "electron-packager": "^7.3.0",
+    "electron-prebuilt": "^1.2.7"
+  },
+  "dependencies": {
+    "electron-json-storage": "^3.1.1"
+  }
 }

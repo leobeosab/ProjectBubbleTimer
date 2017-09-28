@@ -1,6 +1,7 @@
 //electron imports
-const { ipcMain } = require('electron');
-const { apiKey, domain } = require("./constants");
+const { ipcMain, remote } = require('electron');
+const storage = require('electron-json-storage');
+const path = require('path');
 
 const apiBase = "https://api.projectbubble.com/v2/";
 
@@ -10,8 +11,12 @@ let subTaskSelect;
 let date;
 let hours;
 let description;
+let apikey;
+let domain;
+let name;
 
 function init() {
+    
   projectSelect = document.getElementById("project_select");
   taskSelect = document.getElementById("task_select");
   subTaskSelect = document.getElementById("subtask_select");
@@ -117,7 +122,7 @@ function submitToProjectBubble() {
 
 function requestApi(request, callback, getVars) {
   var headers = new Headers({
-    'key': apiKey,
+    'key': apikey,
     'domain': domain
   });
   
@@ -145,4 +150,15 @@ function addToSelect(select, text, value) {
   select.options[select.options.length] = new Option(text, value);
 }
 
-document.addEventListener("DOMContentLoaded", () => init());
+document.addEventListener("DOMContentLoaded", 
+() => storage.get("login", (error, obj) => {
+  if (error || Object.keys(obj).length == 0) {
+    remote.getCurrentWindow().loadURL(`file://${path.join(__dirname, 'login.html')}`);
+  } else {
+    domain = obj.domain;
+    apikey = obj.apikey;
+    name = obj.name;
+    document.getElementById("name").innerHTML = name;
+    init();
+  }
+}));

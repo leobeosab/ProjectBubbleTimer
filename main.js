@@ -26,9 +26,9 @@ const createTray = () => {
       showWindow();
     }
     // Show devtools when command clicked
-    //if (window.isVisible()) {
-    //  window.openDevTools({mode: 'detach'});
-    //}
+    if (window.isVisible()) {
+      window.openDevTools({mode: 'detach'});
+    }
   });
 }
 

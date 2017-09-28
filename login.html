@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Add Time </title>
+    <link rel="stylesheet" href="./vendor/css/photon.min.css" media="screen"/>
+    <link rel="stylesheet" href="./assets/css/style.css" media="screen"/>
+    <script src="./login.js"></script>
+  </head>
+  <body>
+    <section class="window">
+      <header class="toolbar toolbar-header">
+        <h1 class="title">Login to Project Bubble</h1>
+      </header>
+    </section>
+    <section class="window-content">
+      <form>
+        <div class="form-group">
+          <label> Api-key: </label>
+          <input type="text" id="api_key" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label> Domain: </label>
+          <input type="text" id="domain" class="form-control"/>
+        </div>
+        <div class="button-wrapper">
+          <button onclick="return attemptLogin()"> Save </button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>
