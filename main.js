@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain, Tray, ipc} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu, Tray, ipc} = require('electron');
 const path = require('path');
 
 const assetsDirectory = path.join(__dirname, 'assets');
@@ -16,7 +16,16 @@ app.on('ready', () => {
 
 const createTray = () => {
   tray = new Tray(path.join(assetsDirectory, 'img/icon.png'));
-  tray.on('right-click', toggleWindow);
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Item1', type: 'radio'},
+    {label: 'Item2', type: 'radio'},
+    {label: 'Item3', type: 'radio', checked: true},
+    {label: 'Item4', type: 'radio'}
+  ])
+  
+  tray.setToolTip('PB Time Sheet');
+  
+  tray.on('right-click', () => tray.popUpContextMenu(contextMenu));
   tray.on('double-click', toggleWindow);
   tray.on('click', function (event) {
     if (window.isVisible()) {
@@ -26,9 +35,9 @@ const createTray = () => {
       showWindow();
     }
     // Show devtools when command clicked
-    if (window.isVisible()) {
-      window.openDevTools({mode: 'detach'});
-    }
+    //if (window.isVisible()) {
+    //  window.openDevTools({mode: 'detach'});
+    //}
   });
 }
 
