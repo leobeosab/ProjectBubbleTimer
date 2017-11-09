@@ -1,5 +1,6 @@
-const {app, BrowserWindow, ipcMain, Menu, Tray, ipc} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu, Tray} = require('electron');
 const path = require('path');
+const storage = require('electron-json-storage');
 
 const assetsDirectory = path.join(__dirname, 'assets');
 
@@ -17,11 +18,18 @@ app.on('ready', () => {
 const createTray = () => {
   tray = new Tray(path.join(assetsDirectory, 'img/icon.png'));
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'radio'},
-    {label: 'Item2', type: 'radio'},
-    {label: 'Item3', type: 'radio', checked: true},
-    {label: 'Item4', type: 'radio'}
-  ])
+    {
+      label: 'Quit',
+      click: () => app.quit()
+    },
+    {
+      label: 'Logout',
+      click: () =>  {
+        window.hide();
+        storage.set("login", {}, (err) => console.log(err));
+      }
+    }
+  ]);
   
   tray.setToolTip('PB Time Sheet');
   
@@ -34,12 +42,8 @@ const createTray = () => {
       createWindow();
       showWindow();
     }
-    // Show devtools when command clicked
-    //if (window.isVisible()) {
-    //  window.openDevTools({mode: 'detach'});
-    //}
   });
-}
+};
 
 const getWindowPosition = () => {
   const windowBounds = window.getBounds();
@@ -92,7 +96,7 @@ const showWindow = () => {
   window.setPosition(position.x, position.y, false);
   window.show();
   window.focus();
-}
+};
 
 ipcMain.on('hide-window', function(event, arg) {
   window.hide();
