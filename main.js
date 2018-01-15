@@ -8,7 +8,7 @@ let tray = undefined;
 let window = undefined;
 
 // Don't show the app in the doc
-app.dock.hide()
+app.dock.hide();
 
 app.on('ready', () => {
   createTray();
@@ -56,7 +56,7 @@ const getWindowPosition = () => {
   const y = Math.round(trayBounds.y + trayBounds.height);
 
   return {x: x, y: y};
-}
+};
 
 const createWindow = () => {
   window = new BrowserWindow({
@@ -89,7 +89,7 @@ const toggleWindow = () => {
   } else {
     showWindow();
   }
-}
+};
 
 const showWindow = () => {
   const position = getWindowPosition();
@@ -98,7 +98,7 @@ const showWindow = () => {
   window.focus();
 };
 
-ipcMain.on('hide-window', function(event, arg) {
+ipcMain.on('hide-window', function() {
   window.hide();
 });
 

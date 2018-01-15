@@ -1,6 +1,6 @@
 {
   "name": "ProjectBubbleTrapApp",
-  "productName": "PB Tray Application",
+  "productName": "Project Bubble Timesheet",
   "version": "0.0.2",
   "main": "main.js",
   "author": "Ryan Wise",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/leobeosab/ProjectBubbleTrapApp"
+    "url": "https://github.com/leobeosab/ProjectBubbleTrayApp"
   },
   "devDependencies": {
     "electron-packager": "^7.3.0",
